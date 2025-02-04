@@ -151,24 +151,26 @@ input{
     z-index: 100;
 }
 
-.container.container.right-panel-active .overlay-container{
-    transform: translateX(-100%);
+.container.right-panel-active .overlay-container {
+    transform: translateX(-50%);
 }
 
-.overlay{
-    background:linear-gradient(to right , rgb(70, 70, 255) , 
-    rgba(67, 67, 255, 0.847));
+
+.overlay {
+    background: linear-gradient(to right, rgb(70, 70, 255), rgba(67, 67, 255, 0.847));
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0 0;
+    background-position: center;
     color: white;
-    position: relative;
-    left: -100%;
+    position: absolute; /* Instead of relative */
+    left: 0; /* Keep it inside the container */
     height: 100%;
-    width: 200%;
+    width: 100%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
 }
+
+
 
 .container.container.right-panel-active .overlay{
     transform: translateX(50%);
@@ -194,4 +196,30 @@ input{
 
 .container.container.right-panel-active .overlay-left{
     transform: translateX(0);
+}
+
+.overlay-right{
+    position: absolute;
+    right: 0;
+    transform: translateX(0);
+}
+
+
+.container.container.right-panel-active .overlay-right{
+    transform: translateX(20%);
+}
+
+.social-container{
+    margin: 20px 0;
+}
+
+.social-container a{
+    border: 1px solid #DDDDDDDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
 }
