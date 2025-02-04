@@ -183,6 +183,7 @@ input{
     justify-content: center;
     flex-direction: column;
     padding: 0 40px;
+    text-align: center;
     top: 0;
     height: 100%;
     width: 50%;
@@ -190,8 +191,18 @@ input{
     transition: transform 0.6s ease-in-out;
 }
 
+/* .overlay-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    text-align: center; 
+    padding: 0 40px;
+} */
+
+
 .overlay-left{
-    transform: translateX(-20%);
+    transform: translateX(-10%);
 }
 
 .container.container.right-panel-active .overlay-left{
