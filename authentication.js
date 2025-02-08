@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
+// Import Firebase SDKs
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBTsBQGPCshPJU83FJLrZNSPiUXx98h6js",
   authDomain: "bug-tracker-e606b.firebaseapp.com",
@@ -19,3 +16,41 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+// Ensure DOM is fully loaded
+window.onload = function () {
+  console.log("Page loaded, attaching event listeners...");
+
+  const submitLogin = document.getElementById("login-submit");
+  const submitSignUp = document.getElementById("signup-submit");
+
+  if (!submitLogin || !submitSignUp) {
+    console.error("Buttons not found. Check your HTML element IDs.");
+    return;
+  }
+
+  // Signup button event listener
+  submitSignUp.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const signUpName = document.getElementById("signup-name").value;
+    const emailSignUp = document.getElementById("signup-email").value;
+    const passwordSignUp = document.getElementById("signup-password").value;
+
+    console.log("Signup Attempt:", signUpName, emailSignUp, passwordSignUp);
+    alert("Signup clicked!");
+  });
+
+  // Login button event listener
+  submitLogin.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const emailLogin = document.getElementById("login-email").value;
+    const passwordLogin = document.getElementById("login-password").value;
+
+    console.log("Login Attempt:", emailLogin, passwordLogin);
+    alert("Login clicked!");
+  });
+
+  console.log("Event listeners attached.");
+};
