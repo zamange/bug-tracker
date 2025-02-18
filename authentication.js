@@ -1,13 +1,13 @@
-// Import Firebase SDKs
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// Import Firebase SDK from CDN
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBTsBQGPCshPJU83FJLrZNSPiUXx98h6js",
   authDomain: "bug-tracker-e606b.firebaseapp.com",
   projectId: "bug-tracker-e606b",
-  storageBucket: "bug-tracker-e606b.firebasestorage.app",
+  storageBucket: "bug-tracker-e606b.appspot.com",
   messagingSenderId: "907531647590",
   appId: "1:907531647590:web:8ad327917acfeeb1614ba7",
   measurementId: "G-94ECXFN7E7"
@@ -15,9 +15,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
 
-// Ensure DOM is fully loaded
 window.onload = function () {
   console.log("Page loaded, attaching event listeners...");
 
@@ -37,8 +36,20 @@ window.onload = function () {
     const emailSignUp = document.getElementById("signup-email").value;
     const passwordSignUp = document.getElementById("signup-password").value;
 
-    console.log("Signup Attempt:", signUpName, emailSignUp, passwordSignUp);
-    alert("Signup clicked!");
+    if (!emailSignUp || !passwordSignUp) {
+      alert("Please enter a valid email and password.");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, emailSignUp, passwordSignUp)
+      .then((userCredential) => {
+        console.log("Signup Successful", userCredential.user);
+        alert("Signup Successful!");
+      })
+      .catch((error) => {
+        console.error("Signup Failed:", error.message);
+        alert(error.message);
+      });
   });
 
   // Login button event listener
@@ -48,8 +59,20 @@ window.onload = function () {
     const emailLogin = document.getElementById("login-email").value;
     const passwordLogin = document.getElementById("login-password").value;
 
-    console.log("Login Attempt:", emailLogin, passwordLogin);
-    alert("Login clicked!");
+    if (!emailLogin || !passwordLogin) {
+      alert("Please enter a valid email and password.");
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, emailLogin, passwordLogin)
+      .then((userCredential) => {
+        console.log("Login Successful", userCredential.user);
+        alert("Login Successful!");
+      })
+      .catch((error) => {
+        console.error("Login Failed:", error.message);
+        alert(error.message);
+      });
   });
 
   console.log("Event listeners attached.");
